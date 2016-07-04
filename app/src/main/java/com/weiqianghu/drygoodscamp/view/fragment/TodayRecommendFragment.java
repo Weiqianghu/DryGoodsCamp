@@ -13,7 +13,6 @@ import com.weiqianghu.drygoodscamp.entity.DryGoods;
 import com.weiqianghu.drygoodscamp.presenter.TodayRecommendPresenter;
 import com.weiqianghu.drygoodscamp.view.TodayRecommendView;
 import com.weiqianghu.drygoodscamp.view.adapter.RecommendAdapter;
-import com.weiqianghu.drygoodscamp.widget.Kanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +25,8 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
     private TodayRecommendPresenter mTodayRecommendPresenter;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private Kanner mKanner;
     private RecyclerView mRecyclerView;
 
-    private List<DryGoods> mWelfares = new ArrayList<>();
     private List<DryGoods> mRecommends = new ArrayList<>();
     private RecommendAdapter mAdapter;
 
@@ -46,14 +43,17 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
     }
 
     private void initData() {
-        mSwipeRefreshLayout.setRefreshing(true);
-        mTodayRecommendPresenter = new TodayRecommendPresenter(this);
-        mTodayRecommendPresenter.loadTodayRecommend();
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        });
 
-        mAdapter = new RecommendAdapter(mRecommends);
-        mRecyclerView.setAdapter(mAdapter);
         SpacesItemDecoration decoration = new SpacesItemDecoration(16);
         mRecyclerView.addItemDecoration(decoration);
+        mAdapter = new RecommendAdapter(mRecommends);
+        mRecyclerView.setAdapter(mAdapter);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
@@ -63,6 +63,9 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
+
+        mTodayRecommendPresenter = new TodayRecommendPresenter(this);
+        mTodayRecommendPresenter.loadTodayRecommend();
     }
 
     @Override
@@ -73,16 +76,7 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
 
     @Override
     public void updateWelfares(List<DryGoods> dryGoodses) {
-        /*if (mKanner == null) {
-            mKanner = (Kanner) mRecyclerView.getChildAt(0);
-        }
-
-        List<String> urls = new ArrayList<>();
-        String[] urlArray = new String[0];
-        for (DryGoods goods : dryGoodses) {
-            urls.add(goods.url);
-        }
-        mKanner.setImagesUrl(urls.toArray(urlArray));*/
+        mAdapter.setWelfares(dryGoodses);
     }
 
     @Override

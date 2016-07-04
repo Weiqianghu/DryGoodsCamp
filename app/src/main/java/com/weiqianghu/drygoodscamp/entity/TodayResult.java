@@ -18,5 +18,7 @@ public class TodayResult<T> {
         public List<DryGoods> 拓展资源;
         public List<DryGoods> 瞎推荐;
         public List<DryGoods> 福利;
+        public List<DryGoods> 前端;
+        public List<DryGoods> APP;
     }
 }

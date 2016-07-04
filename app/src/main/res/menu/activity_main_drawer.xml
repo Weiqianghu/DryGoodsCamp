@@ -7,21 +7,41 @@
             android:icon="@drawable/today_recommend"
             android:title="@string/today_recommend"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
+            android:id="@+id/nav_android"
+            android:icon="@drawable/android"
+            android:title="@string/android"/>
+        <item
+            android:id="@+id/nav_ios"
+            android:icon="@drawable/ios"
+            android:title="@string/ios"/>
         <item
             android:id="@+id/nav_welfare"
             android:icon="@drawable/welfare"
             android:title="@string/welfare"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
+            android:id="@+id/nav_front"
+            android:icon="@drawable/front"
+            android:title="@string/front"/>
+
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
+            android:id="@+id/nav_expand"
+            android:icon="@drawable/expand"
+            android:title="@string/expand"/>
+
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@drawable/app"
+            android:title="@string/app"/>
+
+        <item
+            android:id="@+id/nav_recommend"
+            android:icon="@drawable/recommend"
+            android:title="@string/recommend"/>
+
+        <item
+            android:id="@+id/nav_rest"
+            android:icon="@drawable/rest"
+            android:title="@string/rest"/>
     </group>
 
     <item android:title="Communicate">

@@ -3,6 +3,10 @@ package com.weiqianghu.drygoodscamp.utils;
 
 import android.text.format.Time;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by huweiqiang on 2016/6/30.
  */
@@ -16,12 +20,22 @@ public class DateUtil {
 
     public static int getMonth() {
         sTime.setToNow();
-        return sTime.month;
+        return sTime.month + 1;
     }
 
     public static int getDay() {
         sTime.setToNow();
         return sTime.monthDay;
+    }
+
+    public static final Date forMat(String str) {
+        SimpleDateFormat sp = new SimpleDateFormat("yy-MM-dd");
+        try {
+            return sp.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Date();
     }
 
 }

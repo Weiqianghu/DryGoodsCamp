@@ -10,4 +10,7 @@ public class Url {
     public static final String URL_CATEGORY = HOST + "data/";
 
     public static final String URL_DAY = HOST + "day/";
+
+    public static final String URL_HISTORY_DATE = HOST + "day/";
+
 }

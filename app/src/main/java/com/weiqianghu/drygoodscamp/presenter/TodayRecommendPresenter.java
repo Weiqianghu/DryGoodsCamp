@@ -49,6 +49,7 @@ public class TodayRecommendPresenter {
                 TodayResult.TodayRecommend recommend = (TodayResult.TodayRecommend) todayResult.results;
                 mTodayRecommendView.updateWelfares(recommend.福利);
                 mTodayRecommendView.updateRecommend(convert(recommend));
+                mTodayRecommendView.stopRefreshing();
             }
         };
 
@@ -57,11 +58,27 @@ public class TodayRecommendPresenter {
 
     List<DryGoods> convert(TodayResult.TodayRecommend recommend) {
         List<DryGoods> list = new ArrayList<>();
-        list.addAll(recommend.Android);
-        list.addAll(recommend.iOS);
-        list.addAll(recommend.拓展资源);
-        list.addAll(recommend.瞎推荐);
-        list.addAll(recommend.休息视频);
+        if (recommend.Android != null) {
+            list.addAll(recommend.Android);
+        }
+        if (recommend.iOS != null) {
+            list.addAll(recommend.iOS);
+        }
+        if (recommend.拓展资源 != null) {
+            list.addAll(recommend.拓展资源);
+        }
+        if (recommend.瞎推荐 != null) {
+            list.addAll(recommend.瞎推荐);
+        }
+        if (recommend.休息视频 != null) {
+            list.addAll(recommend.休息视频);
+        }
+        if (recommend.前端 != null) {
+            list.addAll(recommend.前端);
+        }
+        if (recommend.APP != null) {
+            list.addAll(recommend.APP);
+        }
         Collections.shuffle(list);
         return list;
     }

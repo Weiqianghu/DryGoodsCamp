@@ -97,8 +97,7 @@ public class Kanner extends FrameLayout {
 
         for (int i = 0; i <= count + 1; i++) {
             ImageView iv = new ImageView(context);
-            iv.setScaleType(ScaleType.FIT_XY);
-//            iv.setBackgroundResource(R.drawable.loading);
+            iv.setScaleType(ScaleType.FIT_CENTER);
             if (i == 0) {
                 iv.setImageResource(imagesRes[count - 1]);
             } else if (i == count + 1) {

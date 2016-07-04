@@ -77,6 +77,7 @@ public class ApiProvider<T> {
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
                         callBack.onError(e);
                     }
 
