@@ -50,19 +50,8 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
             }
         });
 
-        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
-        mRecyclerView.addItemDecoration(decoration);
         mAdapter = new RecommendAdapter(mRecommends);
         mRecyclerView.setAdapter(mAdapter);
-
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
 
         mTodayRecommendPresenter = new TodayRecommendPresenter(this);
         mTodayRecommendPresenter.loadTodayRecommend();
@@ -70,8 +59,20 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
+        mRecyclerView.addItemDecoration(decoration);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (mTodayRecommendPresenter != null) {
+                    mTodayRecommendPresenter.loadTodayRecommend();
+                }
+            }
+        });
     }
 
     @Override
@@ -81,6 +82,7 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
 
     @Override
     public void updateRecommend(List<DryGoods> dryGoodses) {
+        mRecommends.clear();
         mRecommends.addAll(dryGoodses);
         mAdapter.notifyDataSetChanged();
     }

@@ -156,37 +156,37 @@ public class WelfareFragment extends BaseFragment implements IWelfaresView, IRec
                 }
             });
             mBtnSave = (Button) mPopupWindowView.findViewById(R.id.btn_save);
-            mBtnSave.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mBtnSave.setClickable(false);
-                    new AsyncTask<String, Void, Boolean>() {
-
-                        @Override
-                        protected Boolean doInBackground(String... params) {
-                            Bitmap bitmap = ImageUtil.getBitMapByUrl(params[0]);
-                            if (bitmap != null) {
-                                String url = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(),
-                                        bitmap, "title", "description");
-                                return true;
-                            }
-                            return false;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Boolean aBoolean) {
-                            super.onPostExecute(aBoolean);
-                            if (aBoolean) {
-                                ToastUtil.show("保存成功");
-                            } else {
-                                ToastUtil.show("保存失败！");
-                            }
-                            mBtnSave.setClickable(true);
-                        }
-                    }.execute(mDryGoodses.get(position).url);
-                }
-            });
         }
+        mBtnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBtnSave.setClickable(false);
+                new AsyncTask<String, Void, Boolean>() {
+
+                    @Override
+                    protected Boolean doInBackground(String... params) {
+                        Bitmap bitmap = ImageUtil.getBitMapByUrl(params[0]);
+                        if (bitmap != null) {
+                            String url = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(),
+                                    bitmap, "title", "description");
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Boolean aBoolean) {
+                        super.onPostExecute(aBoolean);
+                        if (aBoolean) {
+                            ToastUtil.show("保存成功");
+                        } else {
+                            ToastUtil.show("保存失败！");
+                        }
+                        mBtnSave.setClickable(true);
+                    }
+                }.execute(mDryGoodses.get(position).url);
+            }
+        });
         ImageLoader.displayImg(mIvWelfareDetail, mDryGoodses.get(position).url);
     }
 
