@@ -38,4 +38,7 @@ public class Constant {
     public static final String CATEGORY_RECOMMEND = "瞎推荐";
     public static final String CATEGORY_APP = "App";
 
+    public static final String ARG_URL = "arg_url";
+    public static final String ARG_TITLE = "arg_title";
+
 }

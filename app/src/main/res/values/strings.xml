@@ -19,4 +19,6 @@
     <string name="recommend">瞎推荐</string>
     <string name="rest">休息视频</string>
     <string name="app">APP</string>
+    <string name="open_by_default_browser">利用默认浏览器打开</string>
+    <string name="copy_url">将当前Url复制到剪贴板</string>
 </resources>

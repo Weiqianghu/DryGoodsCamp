@@ -70,7 +70,7 @@ public abstract class CommonAdapterForRecycleView<T> extends RecyclerView.Adapte
         return super.getItemViewType(position);
     }
 
-    private IRecycleViewItemClickListener mClickListener;
+    protected IRecycleViewItemClickListener mClickListener;
 
     public void setOnItemClickListener(IRecycleViewItemClickListener listener) {
         this.mClickListener = listener;

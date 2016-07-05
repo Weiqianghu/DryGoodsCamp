@@ -1,6 +1,7 @@
 package com.weiqianghu.drygoodscamp.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,11 +12,14 @@ import android.view.View;
 import com.cundong.recyclerview.EndlessRecyclerOnScrollListener;
 import com.weiqianghu.drygoodscamp.R;
 import com.weiqianghu.drygoodscamp.base.adapter.CommonAdapterForRecycleView;
+import com.weiqianghu.drygoodscamp.base.adapter.IRecycleViewItemClickListener;
 import com.weiqianghu.drygoodscamp.base.adapter.SpacesItemDecoration;
 import com.weiqianghu.drygoodscamp.base.view.BaseFragment;
 import com.weiqianghu.drygoodscamp.base.viewholder.ViewHolderForRecyclerView;
+import com.weiqianghu.drygoodscamp.common.Constant;
 import com.weiqianghu.drygoodscamp.entity.DryGoods;
 import com.weiqianghu.drygoodscamp.presenter.CategoryPresenter;
+import com.weiqianghu.drygoodscamp.view.activity.WebViewActivity;
 import com.weiqianghu.drygoodscamp.view.view.ICategoryView;
 
 import java.net.MalformedURLException;
@@ -26,7 +30,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class BaseCategoryFragment extends BaseFragment implements ICategoryView {
+public abstract class BaseCategoryFragment extends BaseFragment implements ICategoryView, IRecycleViewItemClickListener {
     private static final String TAG = "BaseCategoryFragment";
     private static final int PAGE_SIZE = 20;
 
@@ -97,6 +101,7 @@ public abstract class BaseCategoryFragment extends BaseFragment implements ICate
             }
         };
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(this);
         mCategoryPresenter = new CategoryPresenter(this);
         mCategoryPresenter.initCategory(getCategory(), PAGE_SIZE);
     }
@@ -145,4 +150,12 @@ public abstract class BaseCategoryFragment extends BaseFragment implements ICate
             mCategoryPresenter.loadCategory(getCategory(), ++page, PAGE_SIZE);
         }
     };
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(Constant.ARG_URL, mDryGoodses.get(position).url);
+        intent.putExtra(Constant.ARG_TITLE, mDryGoodses.get(position).desc);
+        startActivity(intent);
+    }
 }
