@@ -14,11 +14,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.weiqianghu.drygoodscamp.R;
-import com.weiqianghu.drygoodscamp.base.view.App;
 import com.weiqianghu.drygoodscamp.common.Constant;
 import com.weiqianghu.drygoodscamp.utils.ToastUtil;
 
@@ -26,6 +26,10 @@ public class WebViewActivity extends AppCompatActivity {
     private WebView mWebView;
     private ProgressBar mProgressBar;
     private String mUrl;
+    private RelativeLayout mLayoutError;
+    private Button mBtnReload;
+
+    private boolean isError = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     private void initView() {
         initToolBar();
+        initErrorView();
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mWebView = (WebView) findViewById(R.id.web_view);
@@ -57,15 +62,32 @@ public class WebViewActivity extends AppCompatActivity {
                 mProgressBar.setProgress(progress);
                 if (progress >= 100) {
                     mProgressBar.setVisibility(View.GONE);
+                    if (!isError) {
+                        mLayoutError.setVisibility(View.GONE);
+                    }
                 }
             }
         });
         mWebView.setWebViewClient(new WebViewClient() {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Toast.makeText(App.getContext(), "Oh no! " + description, Toast.LENGTH_SHORT).show();
+                mLayoutError.setVisibility(View.VISIBLE);
+                isError = true;
             }
         });
         mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
+    }
+
+    private void initErrorView() {
+        mLayoutError = (RelativeLayout) findViewById(R.id.rl_error);
+        mBtnReload = (Button) findViewById(R.id.btn_reload);
+        mBtnReload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isError = false;
+                mWebView.reload();
+                mProgressBar.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void initToolBar() {

@@ -55,7 +55,7 @@ public class RecommendAdapter extends CommonAdapterForRecycleView<DryGoods> {
     public void onBindViewHolder(ViewHolderForRecyclerView holder, int position) {
         if (position != 0) {
             holder.itemView.setTag(position);
-            convert(holder, mDatas.get(position));
+            convert(holder, mDatas.get(position-1));
         } else {
             convertHeaderView(holder);
         }

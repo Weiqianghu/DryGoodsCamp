@@ -12,8 +12,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save">保存到手机</string>
     <string name="today_recommend">今日推荐</string>
-    <string name="android">android</string>
-    <string name="ios">ios</string>
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
     <string name="front">前端</string>
     <string name="expand">扩展资源</string>
     <string name="recommend">瞎推荐</string>

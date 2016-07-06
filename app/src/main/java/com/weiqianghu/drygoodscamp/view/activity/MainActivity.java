@@ -11,6 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment mRecommendFragment;
     private Fragment mRestFragment;
     private Fragment mAppFragment;
+    private DrawerLayout mDrawer;
 
 
     @Override
@@ -82,10 +85,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -265,5 +268,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void showWelfareImg(DryGoods dryGoods) {
         ImageLoader.displayImg(mIvHeader, dryGoods.url, R.mipmap.head, R.mipmap.head);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDrawer.isDrawerOpen(Gravity.LEFT)) {
+                mDrawer.closeDrawer(Gravity.LEFT);
+                return true;
+            } else if (mFragmentManager.findFragmentByTag(TodayRecommendFragment.TAG) == null) {
+                getSupportActionBar().setTitle(R.string.today_recommend);
+                gotoTodayRecommend();
+                return true;
+            } else {
+                return super.onKeyDown(keyCode, event);
+            }
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 }

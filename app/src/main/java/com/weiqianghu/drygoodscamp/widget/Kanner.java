@@ -97,7 +97,7 @@ public class Kanner extends FrameLayout {
 
         for (int i = 0; i <= count + 1; i++) {
             ImageView iv = new ImageView(context);
-            iv.setScaleType(ScaleType.CENTER_CROP);
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             if (i == 0) {
                 iv.setImageResource(imagesRes[count - 1]);
             } else if (i == count + 1) {
@@ -126,6 +126,7 @@ public class Kanner extends FrameLayout {
 
         for (int i = 0; i <= count + 1; i++) {
             ImageView iv = new ImageView(context);
+            iv.setScaleType(ScaleType.CENTER_CROP);
 //            iv.setBackgroundResource(R.mipmap.loading);
             if (i == 0) {
                 mImageLoader.displayImg(iv, imagesUrl[count - 1]);
@@ -136,7 +137,6 @@ public class Kanner extends FrameLayout {
                 mImageLoader.displayImg(iv, imagesUrl[i - 1]);
 
             }
-            iv.setScaleType(ScaleType.FIT_XY);
             imageViews.add(iv);
         }
     }
