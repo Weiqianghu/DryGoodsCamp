@@ -28,14 +28,19 @@ public class DateUtil {
         return sTime.monthDay;
     }
 
-    public static final Date forMat(String str) {
-        SimpleDateFormat sp = new SimpleDateFormat("yy-MM-dd");
+    public static final Date parse(String str) {
+        SimpleDateFormat sp = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return sp.parse(str);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return new Date();
+    }
+
+    public static String format(Date date) {
+        SimpleDateFormat sp = new SimpleDateFormat("yyyy-MM-dd");
+        return sp.format(date);
     }
 
 }

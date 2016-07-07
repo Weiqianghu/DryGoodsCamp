@@ -60,6 +60,7 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
         mAdapter.setOnItemClickListener(this);
 
         mTodayRecommendPresenter = new TodayRecommendPresenter(this);
+        mTodayRecommendPresenter.loadWelfares();
         mTodayRecommendPresenter.loadTodayRecommend();
     }
 

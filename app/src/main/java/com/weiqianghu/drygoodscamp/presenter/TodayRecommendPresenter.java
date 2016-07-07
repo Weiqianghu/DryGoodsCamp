@@ -2,9 +2,14 @@ package com.weiqianghu.drygoodscamp.presenter;
 
 import android.util.Log;
 
+import com.weiqianghu.drygoodscamp.base.db.DaoWrapper;
 import com.weiqianghu.drygoodscamp.base.http.CallBack;
+import com.weiqianghu.drygoodscamp.base.http.HttpResult;
 import com.weiqianghu.drygoodscamp.biz.DayBiz;
+import com.weiqianghu.drygoodscamp.biz.WelfareBiz;
 import com.weiqianghu.drygoodscamp.biz.impl.DayBizImpl;
+import com.weiqianghu.drygoodscamp.biz.impl.WelfareBizImpl;
+import com.weiqianghu.drygoodscamp.common.Global;
 import com.weiqianghu.drygoodscamp.entity.DryGoods;
 import com.weiqianghu.drygoodscamp.entity.TodayResult;
 import com.weiqianghu.drygoodscamp.utils.ToastUtil;
@@ -21,10 +26,12 @@ public class TodayRecommendPresenter {
     private static final String TAG = "TodayRecommendPresenter";
     private TodayRecommendView mTodayRecommendView;
     private DayBiz mDayBiz;
+    private WelfareBiz mWelfareBiz;
 
     public TodayRecommendPresenter(TodayRecommendView todayRecommendView) {
         mTodayRecommendView = todayRecommendView;
         mDayBiz = new DayBizImpl();
+        mWelfareBiz = new WelfareBizImpl();
     }
 
     public void loadTodayRecommend() {
@@ -47,13 +54,36 @@ public class TodayRecommendPresenter {
                     ToastUtil.show("今天没有数据哦！");
                 }
                 TodayResult.TodayRecommend recommend = (TodayResult.TodayRecommend) todayResult.results;
-                mTodayRecommendView.updateWelfares(recommend.福利);
+                //mTodayRecommendView.updateWelfares(recommend.福利);
                 mTodayRecommendView.updateRecommend(convert(recommend));
                 mTodayRecommendView.stopRefreshing();
+                if (Global.isUpdate) {
+                    DaoWrapper.insert(convert(recommend));
+                }
             }
         };
 
         mDayBiz.loadData(callBack);
+    }
+
+    public void loadWelfares() {
+        CallBack<HttpResult<DryGoods>> callBack = new CallBack<HttpResult<DryGoods>>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(HttpResult<DryGoods> welfareHttpResult) {
+                if (welfareHttpResult.results.size() > 0) {
+                    mTodayRecommendView.updateWelfares(welfareHttpResult.results);
+                }
+            }
+        };
+        mWelfareBiz.loadData(1, 4, callBack);
     }
 
     List<DryGoods> convert(TodayResult.TodayRecommend recommend) {
