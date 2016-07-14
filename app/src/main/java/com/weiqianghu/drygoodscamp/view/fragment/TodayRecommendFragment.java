@@ -85,6 +85,7 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
     @Override
     public void updateWelfares(List<DryGoods> dryGoodses) {
         mAdapter.setWelfares(dryGoodses);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -96,9 +97,12 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
 
     @Override
     public void stopRefreshing() {
-        if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override

@@ -54,11 +54,11 @@ public class TodayRecommendPresenter {
                     ToastUtil.show("今天没有数据哦！");
                 }
                 TodayResult.TodayRecommend recommend = (TodayResult.TodayRecommend) todayResult.results;
-                //mTodayRecommendView.updateWelfares(recommend.福利);
                 mTodayRecommendView.updateRecommend(convert(recommend));
                 mTodayRecommendView.stopRefreshing();
                 if (Global.isUpdate) {
                     DaoWrapper.insert(convert(recommend));
+                    Global.isUpdate = false;
                 }
             }
         };

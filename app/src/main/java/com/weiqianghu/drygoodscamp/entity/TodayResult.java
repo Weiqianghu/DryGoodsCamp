@@ -21,4 +21,13 @@ public class TodayResult<T> {
         public List<DryGoods> 前端;
         public List<DryGoods> APP;
     }
+
+    public static TodayResult build(List<DryGoods> dryGoodses) {
+        TodayResult.TodayRecommend todayRecommend = new TodayResult.TodayRecommend();
+        todayRecommend.Android = dryGoodses;
+        TodayResult todayResult = new TodayResult();
+        todayResult.results = todayRecommend;
+
+        return todayResult;
+    }
 }

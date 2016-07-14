@@ -47,8 +47,10 @@ public class DaoWrapper {
                 DryGoods dryGoods = parseOrder(cursor);
                 dryGoodses.add(dryGoods);
             }
+            cursor.close();
             return dryGoodses;
         }
+        cursor.close();
         return new ArrayList<>();
     }
 

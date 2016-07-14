@@ -56,6 +56,7 @@ public class ApiProvider<T> {
                             callBack.onError(new HttpErrorException("请求数据出错"));
                         } else {
                             callBack.onNext(tHttpResult);
+                            onCompleted();
                         }
                     }
                 });

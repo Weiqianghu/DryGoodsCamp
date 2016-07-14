@@ -25,6 +25,8 @@ public class OrderDao {
 
         db.insertOrThrow(tableName, null, contentValues);
         db.setTransactionSuccessful();
+
+        db.close();
     }
 
     public void insert(String tableName, List<ContentValues> contentValueses) {
@@ -37,6 +39,8 @@ public class OrderDao {
 
         db.setTransactionSuccessful();
         db.endTransaction();
+
+        db.close();
     }
 
     public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {

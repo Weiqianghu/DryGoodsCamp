@@ -43,4 +43,20 @@ public class DateUtil {
         return sp.format(date);
     }
 
+    public static long today() {
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.HOUR,0);
+//        cal.set(Calendar.SECOND,0);
+//        cal.set(Calendar.MINUTE,0);
+//        cal.set(Calendar.MILLISECOND,0);
+//
+//
+
+        return parse(format(new Date())).getTime();
+    }
+
+    public static Date parse(long time) {
+        return new Date(time);
+    }
+
 }

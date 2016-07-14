@@ -42,16 +42,6 @@ public class MainActivity extends AppCompatActivity
     private View mHeaderView;
 
     private FragmentManager mFragmentManager;
-    private Fragment mWelfareFragment;
-    private Fragment mTodayRecommendFragment;
-
-    private Fragment mAndroidFragment;
-    private Fragment mIosFragment;
-    private Fragment mFrontFragment;
-    private Fragment mExpandFragment;
-    private Fragment mRecommendFragment;
-    private Fragment mRestFragment;
-    private Fragment mAppFragment;
     private DrawerLayout mDrawer;
 
 
@@ -170,99 +160,99 @@ public class MainActivity extends AppCompatActivity
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mAppFragment = mFragmentManager.findFragmentByTag(AppFragment.TAG);
-        if (mAppFragment == null) {
-            mAppFragment = new AppFragment();
+        Fragment appFragment = mFragmentManager.findFragmentByTag(AppFragment.TAG);
+        if (appFragment == null) {
+            appFragment = new AppFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mAppFragment, mFragmentManager, AppFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, appFragment, mFragmentManager, AppFragment.TAG);
     }
 
     private void gotoRest() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mRestFragment = mFragmentManager.findFragmentByTag(RestFragment.TAG);
-        if (mRestFragment == null) {
-            mRestFragment = new RestFragment();
+        Fragment restFragment = mFragmentManager.findFragmentByTag(RestFragment.TAG);
+        if (restFragment == null) {
+            restFragment = new RestFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mRestFragment, mFragmentManager, RestFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, restFragment, mFragmentManager, RestFragment.TAG);
     }
 
     private void gotoRecommend() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mRecommendFragment = mFragmentManager.findFragmentByTag(RecommendFragment.TAG);
-        if (mRecommendFragment == null) {
-            mRecommendFragment = new RecommendFragment();
+        Fragment recommendFragment = mFragmentManager.findFragmentByTag(RecommendFragment.TAG);
+        if (recommendFragment == null) {
+            recommendFragment = new RecommendFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mRecommendFragment, mFragmentManager, RecommendFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, recommendFragment, mFragmentManager, RecommendFragment.TAG);
     }
 
     private void gotoExpand() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mExpandFragment = mFragmentManager.findFragmentByTag(ExpandFragment.TAG);
-        if (mExpandFragment == null) {
-            mExpandFragment = new ExpandFragment();
+        Fragment expandFragment = mFragmentManager.findFragmentByTag(ExpandFragment.TAG);
+        if (expandFragment == null) {
+            expandFragment = new ExpandFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mExpandFragment, mFragmentManager, ExpandFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, expandFragment, mFragmentManager, ExpandFragment.TAG);
     }
 
     private void gotoFront() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mFrontFragment = mFragmentManager.findFragmentByTag(FrontFragment.TAG);
-        if (mFrontFragment == null) {
-            mFrontFragment = new FrontFragment();
+        Fragment frontFragment = mFragmentManager.findFragmentByTag(FrontFragment.TAG);
+        if (frontFragment == null) {
+            frontFragment = new FrontFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mFrontFragment, mFragmentManager, FrontFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, frontFragment, mFragmentManager, FrontFragment.TAG);
     }
 
     private void gotoIos() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mIosFragment = mFragmentManager.findFragmentByTag(IosFragment.TAG);
-        if (mIosFragment == null) {
-            mIosFragment = new IosFragment();
+        Fragment iosFragment = mFragmentManager.findFragmentByTag(IosFragment.TAG);
+        if (iosFragment == null) {
+            iosFragment = new IosFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mIosFragment, mFragmentManager, IosFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, iosFragment, mFragmentManager, IosFragment.TAG);
     }
 
     private void gotoAndroid() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mAndroidFragment = mFragmentManager.findFragmentByTag(AndroidFragment.TAG);
-        if (mAndroidFragment == null) {
-            mAndroidFragment = new AndroidFragment();
+        Fragment androidFragment = mFragmentManager.findFragmentByTag(AndroidFragment.TAG);
+        if (androidFragment == null) {
+            androidFragment = new AndroidFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mAndroidFragment, mFragmentManager, AndroidFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, androidFragment, mFragmentManager, AndroidFragment.TAG);
     }
 
     private void gotoTodayRecommend() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mTodayRecommendFragment = mFragmentManager.findFragmentByTag(TodayRecommendFragment.TAG);
-        if (mTodayRecommendFragment == null) {
-            mTodayRecommendFragment = new TodayRecommendFragment();
+        Fragment todayRecommendFragment = mFragmentManager.findFragmentByTag(TodayRecommendFragment.TAG);
+        if (todayRecommendFragment == null) {
+            todayRecommendFragment = new TodayRecommendFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mTodayRecommendFragment, mFragmentManager, TodayRecommendFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, todayRecommendFragment, mFragmentManager, TodayRecommendFragment.TAG);
     }
 
     private void gotoWelfare() {
         if (mFragmentManager == null) {
             mFragmentManager = getSupportFragmentManager();
         }
-        mWelfareFragment = mFragmentManager.findFragmentByTag(WelfareFragment.TAG);
-        if (mWelfareFragment == null) {
-            mWelfareFragment = new WelfareFragment();
+        Fragment welfareFragment = mFragmentManager.findFragmentByTag(WelfareFragment.TAG);
+        if (welfareFragment == null) {
+            welfareFragment = new WelfareFragment();
         }
-        FragmentUtil.addContent(R.id.main_container, mWelfareFragment, mFragmentManager, WelfareFragment.TAG);
+        FragmentUtil.addContent(R.id.main_container, welfareFragment, mFragmentManager, WelfareFragment.TAG);
     }
 
     @Override

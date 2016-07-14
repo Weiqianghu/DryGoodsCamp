@@ -78,8 +78,7 @@ public class ViewHolderForRecyclerView extends RecyclerView.ViewHolder {
      */
     public ViewHolderForRecyclerView setImageResource(int viewId, int drawableId) {
         ImageView view = getView(viewId);
-        view.setImageResource(drawableId);
-
+        ImageLoader.displayImg(view, drawableId);
         return this;
     }
 

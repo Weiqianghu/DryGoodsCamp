@@ -55,7 +55,7 @@ public class RecommendAdapter extends CommonAdapterForRecycleView<DryGoods> {
     public void onBindViewHolder(ViewHolderForRecyclerView holder, int position) {
         if (position != 0) {
             holder.itemView.setTag(position);
-            convert(holder, mDatas.get(position-1));
+            convert(holder, mDatas.get(position - 1));
         } else {
             convertHeaderView(holder);
         }
@@ -64,11 +64,13 @@ public class RecommendAdapter extends CommonAdapterForRecycleView<DryGoods> {
     private void convertHeaderView(ViewHolderForRecyclerView holder) {
         if (mKanner == null) {
             mKanner = holder.getView(R.id.kanner);
-            List<String> urls = new ArrayList<>();
-            String[] urlArray = new String[0];
-            for (DryGoods goods : mWelfares) {
-                urls.add(goods.url);
-            }
+        }
+        List<String> urls = new ArrayList<>();
+        String[] urlArray = new String[0];
+        for (DryGoods goods : mWelfares) {
+            urls.add(goods.url);
+        }
+        if (urls != null && urls.size() > 0) {
             mKanner.setImagesUrl(urls.toArray(urlArray));
         }
     }

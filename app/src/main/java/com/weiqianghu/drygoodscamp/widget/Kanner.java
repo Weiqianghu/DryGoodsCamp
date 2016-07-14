@@ -21,17 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kanner extends FrameLayout {
-    private int count;
+    private static int count;
     private ImageLoader mImageLoader;
-    private List<ImageView> imageViews;
+    private static List<ImageView> imageViews;
     private Context context;
-    private ViewPager vp;
-    private boolean isAutoPlay;
-    private int currentItem;
+    private static ViewPager vp;
+    private static boolean isAutoPlay;
+    private static int currentItem;
     private int delayTime;
     private LinearLayout ll_dot;
-    private List<ImageView> iv_dots;
-    private Handler handler = new Handler();
+    private static List<ImageView> iv_dots;
+    private static Handler handler = new Handler();
 
     private OnItemClickListener mOnItemClickListener;
 
@@ -72,7 +72,9 @@ public class Kanner extends FrameLayout {
     }
 
     private void initLayout() {
+        removeAllViews();
         imageViews.clear();
+        iv_dots.clear();
         View view = LayoutInflater.from(context).inflate(
                 R.layout.kanner_layout, this, true);
         vp = (ViewPager) view.findViewById(R.id.vp);
@@ -93,7 +95,9 @@ public class Kanner extends FrameLayout {
             ll_dot.addView(iv_dot, params);
             iv_dots.add(iv_dot);
         }
-        iv_dots.get(0).setImageResource(R.drawable.dot_focus);
+        if (iv_dots != null && iv_dots.size() > 0) {
+            iv_dots.get(0).setImageResource(R.drawable.dot_focus);
+        }
 
         for (int i = 0; i <= count + 1; i++) {
             ImageView iv = new ImageView(context);
@@ -122,7 +126,9 @@ public class Kanner extends FrameLayout {
             ll_dot.addView(iv_dot, params);
             iv_dots.add(iv_dot);
         }
-        iv_dots.get(0).setImageResource(R.drawable.dot_focus);
+        if (iv_dots != null && iv_dots.size() > 0) {
+            iv_dots.get(0).setImageResource(R.drawable.dot_focus);
+        }
 
         for (int i = 0; i <= count + 1; i++) {
             ImageView iv = new ImageView(context);
@@ -152,10 +158,11 @@ public class Kanner extends FrameLayout {
 
     private void startPlay() {
         isAutoPlay = true;
+        handler.removeCallbacks(task);
         handler.postDelayed(task, 2000);
     }
 
-    private final Runnable task = new Runnable() {
+    private static final Runnable task = new Runnable() {
 
         @Override
         public void run() {
@@ -174,7 +181,7 @@ public class Kanner extends FrameLayout {
         }
     };
 
-    class KannerPagerAdapter extends PagerAdapter {
+    static class KannerPagerAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
@@ -199,7 +206,7 @@ public class Kanner extends FrameLayout {
 
     }
 
-    class MyOnPageChangeListener implements OnPageChangeListener {
+    static class MyOnPageChangeListener implements OnPageChangeListener {
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
