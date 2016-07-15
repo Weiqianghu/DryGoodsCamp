@@ -15,12 +15,15 @@ import com.weiqianghu.drygoodscamp.base.view.BaseFragment;
 import com.weiqianghu.drygoodscamp.common.Constant;
 import com.weiqianghu.drygoodscamp.entity.DryGoods;
 import com.weiqianghu.drygoodscamp.presenter.TodayRecommendPresenter;
+import com.weiqianghu.drygoodscamp.utils.SPUtil;
 import com.weiqianghu.drygoodscamp.view.TodayRecommendView;
 import com.weiqianghu.drygoodscamp.view.activity.WebViewActivity;
 import com.weiqianghu.drygoodscamp.view.adapter.RecommendAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +58,9 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
             }
         });
 
+
         mAdapter = new RecommendAdapter(mRecommends);
+        mAdapter.setWelfares(SPUtil.readSet(Constant.SP_KEY_WELFARE));
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
 
@@ -84,8 +89,15 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
 
     @Override
     public void updateWelfares(List<DryGoods> dryGoodses) {
-        mAdapter.setWelfares(dryGoodses);
+        Set<String> urlSet = new TreeSet<>();
+        for (DryGoods dryGoods : dryGoodses) {
+            urlSet.add(dryGoods.url);
+        }
+
+        mAdapter.setWelfares(urlSet);
         mAdapter.notifyDataSetChanged();
+
+        SPUtil.save(Constant.SP_KEY_WELFARE, urlSet);
     }
 
     @Override

@@ -48,8 +48,8 @@ public class SplashActivity extends BaseActivity implements IWelfareView {
         mTvAppName = (TextView) findViewById(R.id.tv_app_name);
         ObjectAnimator animator = ObjectAnimator.
                 ofFloat(mTvAppName, "TextSize",
-                        DimensUtil.dip2px(24),
-                        DimensUtil.dip2px(30));
+                        DimensUtil.dip2px(18),
+                        DimensUtil.dip2px(24));
         animator.setDuration(2000);
         animator.start();
     }

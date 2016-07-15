@@ -1,5 +1,7 @@
 package com.weiqianghu.drygoodscamp.biz.handler;
 
+import android.util.Log;
+
 import com.weiqianghu.drygoodscamp.base.db.DaoWrapper;
 import com.weiqianghu.drygoodscamp.base.http.CallBack;
 import com.weiqianghu.drygoodscamp.base.http.HttpResult;
@@ -18,17 +20,18 @@ import java.util.List;
 /**
  * Created by huweiqiang on 2016/7/12.
  */
-public class DiskDayHandler extends DayHandler {
+public class DiskTodayRecommendHandler extends BaseHandler {
     private HistoryDateBiz mHistoryDateBiz;
 
-    public DiskDayHandler() {
-        setSuccessor(new NetDayHandler());
+    public DiskTodayRecommendHandler() {
+        setSuccessor(new NetTodayRecommendHandler());
         mHistoryDateBiz = new HistoryDateBizImpl();
     }
 
     @Override
     public void handleRequest(final CallBack callBack) {
-        long savedUpdateDate = SPUtil.readLong(Constant.SP_KEY_UPDATE_DATE);
+        final long savedUpdateDate = SPUtil.readLong(Constant.SP_KEY_UPDATE_DATE);
+        Log.d("savedUpdateDate", "savedUpdateDate:" + savedUpdateDate);
 
         CallBack<HttpResult<String>> historyCallBack = new CallBack<HttpResult<String>>() {
             @Override
@@ -38,7 +41,12 @@ public class DiskDayHandler extends DayHandler {
 
             @Override
             public void onError(Throwable e) {
-                getSuccessor().handleRequest(callBack);
+                List<DryGoods> dryGoodses = DaoWrapper.query(DateUtil.parse(savedUpdateDate));
+                if (dryGoodses != null && dryGoodses.size() > 0) {
+                    callBack.onNext(TodayResult.build(dryGoodses));
+                } else {
+                    getSuccessor().handleRequest(callBack);
+                }
             }
 
             @Override
@@ -56,7 +64,7 @@ public class DiskDayHandler extends DayHandler {
                         List<DryGoods> dryGoodses = DaoWrapper.query(DateUtil.parse(updateDate));
                         if (dryGoodses != null && dryGoodses.size() > 0) {
                             callBack.onNext(TodayResult.build(dryGoodses));
-                        }else {
+                        } else {
                             getSuccessor().handleRequest(callBack);
                         }
                     }
@@ -68,7 +76,7 @@ public class DiskDayHandler extends DayHandler {
             List<DryGoods> dryGoodses = DaoWrapper.query(DateUtil.parse(savedUpdateDate));
             if (dryGoodses != null && dryGoodses.size() > 0) {
                 callBack.onNext(TodayResult.build(dryGoodses));
-            }else {
+            } else {
                 getSuccessor().handleRequest(callBack);
             }
         } else {

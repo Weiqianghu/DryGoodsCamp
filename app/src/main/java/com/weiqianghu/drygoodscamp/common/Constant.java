@@ -41,5 +41,6 @@ public class Constant {
     public static final String ARG_URL = "arg_url";
     public static final String ARG_TITLE = "arg_title";
 
-    public static final String SP_KEY_UPDATE_DATE="sp_key_update_date";
+    public static final String SP_KEY_UPDATE_DATE = "sp_key_update_date";
+    public static final String SP_KEY_WELFARE = "sp_key_welfare";
 }

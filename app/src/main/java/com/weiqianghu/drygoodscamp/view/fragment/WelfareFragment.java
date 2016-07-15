@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -138,7 +139,7 @@ public class WelfareFragment extends BaseFragment implements IWelfaresView, IRec
             DisplayMetrics dm = getResources().getDisplayMetrics();
             mHeight = dm.heightPixels;
         }
-        mPopupWindow.showAsDropDown(mRootView, 0, -mHeight);
+        mPopupWindow.showAtLocation(mRootView, Gravity.BOTTOM, 0, 0);
     }
 
 

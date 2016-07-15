@@ -11,8 +11,9 @@ import com.weiqianghu.drygoodscamp.base.viewholder.ViewHolderForRecyclerView;
 import com.weiqianghu.drygoodscamp.entity.DryGoods;
 import com.weiqianghu.drygoodscamp.widget.Kanner;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by huweiqiang on 2016/6/30.
@@ -20,7 +21,7 @@ import java.util.List;
 public class RecommendAdapter extends CommonAdapterForRecycleView<DryGoods> {
     private static final int HEADER = 1001;
 
-    private List<DryGoods> mWelfares = new ArrayList<>();
+    private Set<String> mWelfares = new TreeSet<>();
     private Kanner mKanner;
 
 
@@ -65,13 +66,10 @@ public class RecommendAdapter extends CommonAdapterForRecycleView<DryGoods> {
         if (mKanner == null) {
             mKanner = holder.getView(R.id.kanner);
         }
-        List<String> urls = new ArrayList<>();
         String[] urlArray = new String[0];
-        for (DryGoods goods : mWelfares) {
-            urls.add(goods.url);
-        }
-        if (urls != null && urls.size() > 0) {
-            mKanner.setImagesUrl(urls.toArray(urlArray));
+
+        if (mWelfares != null && mWelfares.size() > 0) {
+            mKanner.setImagesUrl(mWelfares.toArray(urlArray));
         }
     }
 
@@ -97,7 +95,10 @@ public class RecommendAdapter extends CommonAdapterForRecycleView<DryGoods> {
         return super.getItemViewType(position);
     }
 
-    public void setWelfares(List<DryGoods> welfares) {
-        mWelfares = welfares;
+    public void setWelfares(Set<String> welfares) {
+        if (welfares != null && welfares.size() > 0) {
+            mWelfares.clear();
+            mWelfares = welfares;
+        }
     }
 }

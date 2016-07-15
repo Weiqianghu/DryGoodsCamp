@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * Created by huweiqiang on 2016/7/12.
  */
-public class NetDayHandler extends DayHandler {
+public class NetTodayRecommendHandler extends BaseHandler {
     @Override
     public void handleRequest(CallBack callBack) {
         Date date = DateUtil.parse(SPUtil.readLong(Constant.SP_KEY_UPDATE_DATE));
