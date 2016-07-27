@@ -14,7 +14,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.cundong.recyclerview.EndlessRecyclerOnScrollListener;
 import com.weiqianghu.drygoodscamp.R;
@@ -33,6 +32,8 @@ import com.weiqianghu.drygoodscamp.widget.BaseAnimationPopupWindow;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.senab.photoview.PhotoView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -143,13 +144,13 @@ public class WelfareFragment extends BaseFragment implements IWelfaresView, IRec
     }
 
 
-    private ImageView mIvWelfareDetail;
+    private PhotoView mIvWelfareDetail;
     private Button mBtnSave;
 
     private void initPopupWindowView(final int position) {
         if (mPopupWindowView == null) {
             mPopupWindowView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_welfare_detail, null);
-            mIvWelfareDetail = (ImageView) mPopupWindowView.findViewById(R.id.iv_welfare_detail);
+            mIvWelfareDetail = (PhotoView) mPopupWindowView.findViewById(R.id.iv_welfare_detail);
             mIvWelfareDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
