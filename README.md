@@ -2,7 +2,7 @@
 干货集中营Android版本
 
 本项目是一个利用[干货集中营](http://gank.io/)提供的[接口](gank.io/api)开发的干货集中营的Android版本。
-使用到的技术：MVP、Retrofit、RxJava、MD化的设计、模板设计模式、责任联设计模式
+使用到的技术：MVP、Retrofit、RxJava、MD化的设计、模板设计模式、责任链设计模式
 下面是项目截图
 
 ### 首页
