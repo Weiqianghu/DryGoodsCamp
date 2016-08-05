@@ -22,4 +22,6 @@
     <string name="open_by_default_browser">利用默认浏览器打开</string>
     <string name="copy_url">将当前Url复制到剪贴板</string>
     <string name="preference_file_key">com.weiqianghu.drygoodscamp</string>
+    <string name="search">搜索</string>
+    <string name="about_me">关于我</string>
 </resources>

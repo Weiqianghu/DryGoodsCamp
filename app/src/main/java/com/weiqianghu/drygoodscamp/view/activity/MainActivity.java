@@ -30,6 +30,7 @@ import com.weiqianghu.drygoodscamp.view.fragment.FrontFragment;
 import com.weiqianghu.drygoodscamp.view.fragment.IosFragment;
 import com.weiqianghu.drygoodscamp.view.fragment.RecommendFragment;
 import com.weiqianghu.drygoodscamp.view.fragment.RestFragment;
+import com.weiqianghu.drygoodscamp.view.fragment.SearchFragment;
 import com.weiqianghu.drygoodscamp.view.fragment.TodayRecommendFragment;
 import com.weiqianghu.drygoodscamp.view.fragment.WelfareFragment;
 import com.weiqianghu.drygoodscamp.view.view.IWelfareView;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -149,12 +150,28 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_app:
                 gotoApp();
                 break;
+
+            case R.id.nav_search:
+                gotoSearch();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void gotoSearch() {
+        if (mFragmentManager == null) {
+            mFragmentManager = getSupportFragmentManager();
+        }
+        Fragment searchFragment = mFragmentManager.findFragmentByTag(SearchFragment.TAG);
+        if (searchFragment == null) {
+            searchFragment = new SearchFragment();
+        }
+        FragmentUtil.addContent(R.id.main_container, searchFragment, mFragmentManager, SearchFragment.TAG);
+    }
+
 
     private void gotoApp() {
         if (mFragmentManager == null) {

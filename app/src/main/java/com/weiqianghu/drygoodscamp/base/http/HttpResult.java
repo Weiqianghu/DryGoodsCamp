@@ -8,4 +8,5 @@ import java.util.List;
 public class HttpResult<T> {
     public boolean error;
     public List<T> results;
+    public int count;
 }

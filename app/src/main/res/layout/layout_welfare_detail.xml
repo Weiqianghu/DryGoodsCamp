@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:background="@drawable/btn_ripple_bg"
+        android:background="@color/btnNormal"
         android:text="@string/save"
         android:textColor="@android:color/white"/>
 

@@ -42,6 +42,11 @@
             android:id="@+id/nav_rest"
             android:icon="@drawable/rest"
             android:title="@string/rest"/>
+
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/search"
+            android:title="@string/search"/>
     </group>
 
     <item android:title="Communicate">

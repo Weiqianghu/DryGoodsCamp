@@ -13,4 +13,7 @@ public class Url {
 
     public static final String URL_HISTORY_DATE = HOST + "day/";
 
+    public static final String URL_SEARCH = HOST + "search/";
+
+
 }
