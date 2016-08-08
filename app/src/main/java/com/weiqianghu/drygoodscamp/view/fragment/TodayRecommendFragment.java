@@ -97,6 +97,7 @@ public class TodayRecommendFragment extends BaseFragment implements TodayRecomme
         mAdapter.setWelfares(urlSet);
         mAdapter.notifyDataSetChanged();
 
+        SPUtil.clear(Constant.SP_KEY_WELFARE);
         SPUtil.save(Constant.SP_KEY_WELFARE, urlSet);
     }
 

@@ -1,5 +1,6 @@
 package com.weiqianghu.drygoodscamp.view.activity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +36,7 @@ import com.weiqianghu.drygoodscamp.view.fragment.SearchFragment;
 import com.weiqianghu.drygoodscamp.view.fragment.TodayRecommendFragment;
 import com.weiqianghu.drygoodscamp.view.fragment.WelfareFragment;
 import com.weiqianghu.drygoodscamp.view.view.IWelfareView;
+import com.weiqianghu.drygoodscamp.widget.BaseAnimationPopupWindow;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IWelfareView {
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager mFragmentManager;
     private DrawerLayout mDrawer;
+    private BaseAnimationPopupWindow mPopupWindow;
+    private View mPopupWindowView;
 
 
     @Override
@@ -110,7 +115,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about_me) {
+            showAboutMeWindow();
             return true;
         }
 
@@ -153,6 +159,9 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.nav_search:
                 gotoSearch();
+                break;
+            case R.id.nav_about_me:
+                showAboutMeWindow();
                 break;
         }
 
@@ -293,5 +302,19 @@ public class MainActivity extends AppCompatActivity
         } else {
             return super.onKeyDown(keyCode, event);
         }
+    }
+
+
+    private void showAboutMeWindow() {
+        if (mPopupWindowView == null) {
+            mPopupWindowView = LayoutInflater.from(this).inflate(R.layout.layout_about_me, null);
+
+        }
+        if (mPopupWindow == null) {
+            mPopupWindow = new BaseAnimationPopupWindow(this, mPopupWindowView);
+            mPopupWindow.setBackgroundDrawable(new ColorDrawable(0xffffff));
+        }
+
+        mPopupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
     }
 }

@@ -4,8 +4,15 @@ import com.weiqianghu.drygoodscamp.base.http.CallBack;
 import com.weiqianghu.drygoodscamp.base.http.HttpResult;
 import com.weiqianghu.drygoodscamp.biz.SearchBiz;
 import com.weiqianghu.drygoodscamp.biz.impl.SearchBizImpl;
+import com.weiqianghu.drygoodscamp.common.Constant;
 import com.weiqianghu.drygoodscamp.entity.SearchResult;
+import com.weiqianghu.drygoodscamp.utils.SPUtil;
 import com.weiqianghu.drygoodscamp.view.view.ISearchView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Description ${Desc}
@@ -56,5 +63,27 @@ public class SearchPresenter {
             }
         };
         mSearchBiz.search(query, category, pageSize, page, callBack);
+    }
+
+    public void saveSearchHistory(String searchContent) {
+        Set<String> set = new TreeSet<>();
+        set.add(searchContent);
+        SPUtil.save(Constant.SP_KEY_SEARCH_HISTORY, set);
+        mSearchView.saveSearchHistory(searchContent);
+    }
+
+    public void clearSearchHistory() {
+        SPUtil.clear(Constant.SP_KEY_SEARCH_HISTORY);
+        mSearchView.clearSearchHistories();
+    }
+
+    public void getSearchHistories() {
+        Set<String> searchHistories = SPUtil.readSet(Constant.SP_KEY_SEARCH_HISTORY);
+        List<String> list = new ArrayList<>();
+
+        for (String str : searchHistories) {
+            list.add(str);
+        }
+        mSearchView.showSearchHistories(list);
     }
 }

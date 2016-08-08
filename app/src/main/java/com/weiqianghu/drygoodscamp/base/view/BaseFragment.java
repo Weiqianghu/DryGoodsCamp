@@ -1,12 +1,14 @@
 package com.weiqianghu.drygoodscamp.base.view;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.weiqianghu.drygoodscamp.utils.ToastUtil;
 
@@ -43,4 +45,9 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initView(Bundle savedInstanceState);
 
     protected boolean isFirstIn = true;
+
+    protected void hideSoftWindow() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mRootView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 }

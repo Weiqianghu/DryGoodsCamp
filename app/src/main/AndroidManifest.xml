@@ -30,6 +30,8 @@
             android:name=".view.activity.WebViewActivity"
             android:hardwareAccelerated="true">
         </activity>
+        <activity android:name=".view.activity.SearchDetailActivity">
+        </activity>
     </application>
 
 </manifest>

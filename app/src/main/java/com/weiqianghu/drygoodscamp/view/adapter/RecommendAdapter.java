@@ -101,4 +101,9 @@ public class RecommendAdapter extends CommonAdapterForRecycleView<DryGoods> {
             mWelfares = welfares;
         }
     }
+
+    @Override
+    public int getItemCount() {
+        return mDatas.size() + 1;
+    }
 }

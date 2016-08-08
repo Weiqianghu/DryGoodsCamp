@@ -40,7 +40,8 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_search_result"
@@ -51,5 +52,13 @@
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <Button
+        android:id="@+id/btn_clear_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn"
+        android:text="@string/clear_history"
+        android:textColor="@android:color/white"
+        android:visibility="gone"/>
 
 </LinearLayout>

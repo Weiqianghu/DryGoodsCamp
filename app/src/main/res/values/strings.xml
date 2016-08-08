@@ -24,4 +24,6 @@
     <string name="preference_file_key">com.weiqianghu.drygoodscamp</string>
     <string name="search">搜索</string>
     <string name="about_me">关于我</string>
+    <string name="clear_history">清空搜素历史</string>
+    <string name="about">关于</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.weiqianghu.drygoodscamp.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,16 +13,20 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cundong.recyclerview.EndlessRecyclerOnScrollListener;
 import com.weiqianghu.drygoodscamp.R;
 import com.weiqianghu.drygoodscamp.base.adapter.CommonAdapterForRecycleView;
+import com.weiqianghu.drygoodscamp.base.adapter.IRecycleViewItemClickListener;
 import com.weiqianghu.drygoodscamp.base.view.BaseFragment;
 import com.weiqianghu.drygoodscamp.base.viewholder.ViewHolderForRecyclerView;
+import com.weiqianghu.drygoodscamp.common.Constant;
 import com.weiqianghu.drygoodscamp.entity.SearchResult;
 import com.weiqianghu.drygoodscamp.presenter.SearchPresenter;
+import com.weiqianghu.drygoodscamp.view.activity.WebViewActivity;
 import com.weiqianghu.drygoodscamp.view.view.ISearchView;
 
 import java.net.MalformedURLException;
@@ -32,7 +37,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends BaseFragment implements ISearchView {
+public class SearchFragment extends BaseFragment implements ISearchView, IRecycleViewItemClickListener {
     private AppCompatEditText mEditText;
     private SearchPresenter mPresenter;
     private Spinner mSpinner;
@@ -50,6 +55,11 @@ public class SearchFragment extends BaseFragment implements ISearchView {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private String mQuery;
     private int page = 1;
+
+    private CommonAdapterForRecycleView<String> mSearchHistoryAdapter;
+    private List<String> mSearchHistories = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private Button mClearSearchHistoryBtn;
 
     @Override
     protected int getLayoutId() {
@@ -132,10 +142,18 @@ public class SearchFragment extends BaseFragment implements ISearchView {
                 }
             }
         };
-        RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.rv_search_result);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.addOnScrollListener(mOnScrollListener);
+
+        mSearchHistoryAdapter = new CommonAdapterForRecycleView<String>(mSearchHistories, R.layout.item_search_history) {
+            @Override
+            public void convert(ViewHolderForRecyclerView helper, String item) {
+                helper.setText(R.id.tv_search_history, item);
+            }
+        };
+
+        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.rv_search_result);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(mOnScrollListener);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
@@ -150,6 +168,16 @@ public class SearchFragment extends BaseFragment implements ISearchView {
                 });
             }
         });
+
+        mClearSearchHistoryBtn = (Button) mRootView.findViewById(R.id.btn_clear_history);
+        mClearSearchHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.clearSearchHistory();
+            }
+        });
+
+        mAdapter.setOnItemClickListener(this);
     }
 
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
@@ -163,10 +191,13 @@ public class SearchFragment extends BaseFragment implements ISearchView {
     };
 
     private void search() {
-        mSwipeRefreshLayout.setRefreshing(true);
         mQuery = mEditText.getText().toString().trim();
         if (!TextUtils.isEmpty(mQuery)) {
-            mPresenter.init(mQuery, mCategory, 10);
+            hideSoftWindow();
+            mSwipeRefreshLayout.setRefreshing(true);
+            mClearSearchHistoryBtn.setVisibility(View.GONE);
+            mPresenter.saveSearchHistory(mQuery);
+            mPresenter.init(mQuery, mCategory, PAGE_SIZE);
         }
     }
 
@@ -184,5 +215,32 @@ public class SearchFragment extends BaseFragment implements ISearchView {
         mSearchResults.addAll(results);
         mAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showSearchHistories(List<String> searchHistories) {
+        mSearchHistories.clear();
+        mSearchHistories.addAll(searchHistories);
+        mSearchHistoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void clearSearchHistories() {
+        mSearchHistories.clear();
+        mSearchHistoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void saveSearchHistory(String searchContent) {
+        mSearchHistories.add(searchContent);
+        mSearchHistoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(Constant.ARG_URL, mSearchResults.get(position).url);
+        intent.putExtra(Constant.ARG_TITLE, mSearchResults.get(position).desc);
+        startActivity(intent);
     }
 }

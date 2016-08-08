@@ -43,4 +43,9 @@ public class Constant {
 
     public static final String SP_KEY_UPDATE_DATE = "sp_key_update_date";
     public static final String SP_KEY_WELFARE = "sp_key_welfare";
+    public static final String SP_KEY_SEARCH_HISTORY = "sp_key_search_history";
+
+    public static final String SEARCH_RESULT_INTENT_KEY = "search_result_intent_key";
+    public static final String SEARCH_RESULT_BUNDLE_KEY = "search_result_bundle_key";
+
 }

@@ -38,14 +38,18 @@ public class SPUtil {
     public static void save(String key, Set<String> set) {
         SharedPreferences sp = getSp();
         SharedPreferences.Editor editor = sp.edit();
-        editor.remove(key);
-        editor.commit();
-        editor.apply();
-
         editor.putStringSet(key, set);
         editor.apply();
 
         Log.d(TAG, "save: " + set);
+    }
+
+    public static void clear(String key) {
+        SharedPreferences sp = getSp();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        editor.commit();
+        editor.apply();
     }
 
     public static String readStr(String key) {
