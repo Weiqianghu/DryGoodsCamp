@@ -3,7 +3,7 @@ package com.weiqianghu.drygoodscamp.base.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.weiqianghu.drygoodscamp.base.view.App;
+import com.weiqianghu.drygoodscamp.base.App;
 import com.weiqianghu.drygoodscamp.entity.DryGoods;
 import com.weiqianghu.drygoodscamp.utils.DateUtil;
 

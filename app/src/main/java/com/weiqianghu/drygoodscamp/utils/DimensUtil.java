@@ -1,6 +1,6 @@
 package com.weiqianghu.drygoodscamp.utils;
 
-import com.weiqianghu.drygoodscamp.base.view.App;
+import com.weiqianghu.drygoodscamp.base.App;
 
 /**
  * Created by huweiqiang on 2016/6/29.

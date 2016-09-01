@@ -1,4 +1,4 @@
-package com.weiqianghu.drygoodscamp.base.view;
+package com.weiqianghu.drygoodscamp.base;
 
 import android.app.Application;
 import android.content.Context;

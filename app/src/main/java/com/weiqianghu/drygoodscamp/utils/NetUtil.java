@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.weiqianghu.drygoodscamp.base.view.App;
+import com.weiqianghu.drygoodscamp.base.App;
 import com.weiqianghu.drygoodscamp.common.Constant;
 
 /**

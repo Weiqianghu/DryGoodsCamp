@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.weiqianghu.drygoodscamp.R;
-import com.weiqianghu.drygoodscamp.base.view.App;
+import com.weiqianghu.drygoodscamp.base.App;
 
 import java.util.HashSet;
 import java.util.Set;

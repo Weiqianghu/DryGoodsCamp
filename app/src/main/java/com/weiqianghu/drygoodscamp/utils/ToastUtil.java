@@ -2,7 +2,7 @@ package com.weiqianghu.drygoodscamp.utils;
 
 import android.widget.Toast;
 
-import com.weiqianghu.drygoodscamp.base.view.App;
+import com.weiqianghu.drygoodscamp.base.App;
 
 
 /**
