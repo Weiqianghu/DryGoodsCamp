@@ -23,5 +23,4 @@ public class HttpProvider<T> {
     public T getService(String baseUrl, Class<T> service) {
         return CommonRx.initRetrofit(baseUrl).create(service);
     }
-
 }

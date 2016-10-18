@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.cundong.recyclerview.EndlessRecyclerOnScrollListener;
@@ -71,9 +70,7 @@ public abstract class BaseCategoryFragment extends BaseFragment implements ICate
                     String host = url.getHost();
                     if (host == null) {
                         helper.setImageResource(R.id.iv_host, R.drawable.blog);
-                    }
-                    Log.d(TAG, "convert: " + host);
-                    if ("github.com".equals(host)) {
+                    } else if ("github.com".equals(host)) {
                         helper.setImageResource(R.id.iv_host, R.drawable.github);
                     } else if ("www.jianshu.com".equals(host)) {
                         helper.setImageResource(R.id.iv_host, R.drawable.jianshu);
